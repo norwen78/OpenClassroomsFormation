@@ -50,8 +50,10 @@ public class UserListAdapter extends RecyclerView.Adapter<ListUserViewHolder> {
     // PUBLIC API ---
 
     public void updateList(List<User> newList) {
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new UserDiffCallback(newList, this.users));
-        this.users = new ArrayList<>(newList);
-        diffResult.dispatchUpdatesTo(this);
+        if(newList != null) {
+            DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new UserDiffCallback(newList, this.users));
+            this.users = new ArrayList<>(newList);
+            diffResult.dispatchUpdatesTo(this);
+        }
     }
 }

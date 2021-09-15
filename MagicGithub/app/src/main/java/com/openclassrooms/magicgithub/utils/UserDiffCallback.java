@@ -22,7 +22,9 @@ public class UserDiffCallback extends DiffUtil.Callback{
 
     @Override
     public int getNewListSize() {
-        return newUsers.size();
+        if (newUsers != null)
+            return newUsers.size();
+        else return 0;
     }
 
     @Override
