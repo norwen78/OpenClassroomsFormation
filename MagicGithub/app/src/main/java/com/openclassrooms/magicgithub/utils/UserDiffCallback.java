@@ -1,11 +1,12 @@
 package com.openclassrooms.magicgithub.utils;
 
+import androidx.recyclerview.widget.DiffUtil;
+
 import com.openclassrooms.magicgithub.model.User;
 
 import java.util.List;
-import androidx.recyclerview.widget.DiffUtil;
 
-public class UserDiffCallback extends DiffUtil.Callback{
+public class UserDiffCallback extends DiffUtil.Callback {
 
     private final List<User> oldUsers;
     private final List<User> newUsers;
@@ -22,14 +23,12 @@ public class UserDiffCallback extends DiffUtil.Callback{
 
     @Override
     public int getNewListSize() {
-        if (newUsers != null)
-            return newUsers.size();
-        else return 0;
+        return newUsers.size();
     }
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return oldUsers.get(oldItemPosition).getId() == newUsers.get(newItemPosition).getId() ;
+        return oldUsers.get(oldItemPosition).getId().equals(newUsers.get(newItemPosition).getId());
     }
 
     @Override

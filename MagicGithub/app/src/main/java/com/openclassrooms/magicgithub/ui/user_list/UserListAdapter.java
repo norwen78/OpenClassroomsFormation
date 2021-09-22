@@ -4,25 +4,24 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.openclassrooms.magicgithub.R;
-import com.openclassrooms.magicgithub.model.User;
-import com.openclassrooms.magicgithub.utils.UserDiffCallback;
-import java.util.ArrayList;
-import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class UserListAdapter extends RecyclerView.Adapter<ListUserViewHolder> {
+import com.openclassrooms.magicgithub.R;
+import com.openclassrooms.magicgithub.model.User;
+import com.openclassrooms.magicgithub.utils.UserDiffCallback;
 
-    // FOR DATA ---
-    private List<User> users = new ArrayList<>();
+import java.util.ArrayList;
+import java.util.List;
+
+public class UserListAdapter extends RecyclerView.Adapter<ListUserViewHolder> {
 
     // FOR CALLBACK ---
     private final Listener callback;
-    public interface Listener {
-        void onClickDelete(User user);
-    }
+    // FOR DATA ---
+    private List<User> users = new ArrayList<>();
 
     public UserListAdapter(Listener callback) {
         this.callback = callback;
@@ -33,7 +32,7 @@ public class UserListAdapter extends RecyclerView.Adapter<ListUserViewHolder> {
     public ListUserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_list_user, parent,false);
+        View view = inflater.inflate(R.layout.item_list_user, parent, false);
         return new ListUserViewHolder(view);
     }
 
@@ -47,13 +46,17 @@ public class UserListAdapter extends RecyclerView.Adapter<ListUserViewHolder> {
         return users.size();
     }
 
-    // PUBLIC API ---
-
     public void updateList(List<User> newList) {
-        if(newList != null) {
+        if (newList != null) {
             DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new UserDiffCallback(newList, this.users));
             this.users = new ArrayList<>(newList);
             diffResult.dispatchUpdatesTo(this);
         }
+    }
+
+    // PUBLIC API ---
+
+    public interface Listener {
+        void onClickDelete(User user);
     }
 }

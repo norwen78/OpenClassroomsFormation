@@ -2,10 +2,10 @@ package com.openclassrooms.magicgithub;
 
 import android.app.Application;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.openclassrooms.magicgithub.di.Injection;
 import com.openclassrooms.magicgithub.repository.UserRepository;
-
-import androidx.annotation.VisibleForTesting;
 
 public class MagicGithubApplication extends Application {
 
